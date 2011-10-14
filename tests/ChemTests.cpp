@@ -1,24 +1,35 @@
 #include "CppUTest/TestHarness.h"
+#include <stdio.h>
 
 extern "C" {
 #include "chem.h"
 }
 
-#define EPS 0.00001
+#define EPS 0.0001
 
 TEST_GROUP(CHEM) {
-  void setup() {}
-  void teardown() {}
+	void setup() {}
+	void teardown() {}
 };
 
-TEST(CHEM, SquareRoot) {
-  float square = 2;
-  float root = chem_sqrt(square);
-  DOUBLES_EQUAL(square, root*root, EPS);
+TEST(CHEM, SquareRootOfSeveralNumbers) {
+	float square;
+	float root;
+
+	for (square = 1; square < 200.f; square += 1.5f) {
+		root = chem_sqrt(square);
+/*		printf("%f is the root of %f\n", root, square);*/
+		DOUBLES_EQUAL(square, root*root, EPS);
+	}
 }
 
-TEST(CHEM, CubeRoot) {
-  float cube = 5;
-  float root = chem_cbrt(cube);
-  DOUBLES_EQUAL(cube, root*root*root, EPS);
+TEST(CHEM, CubeRootOfSeveralNumbers) {
+	float cube;
+	float root;
+
+	for (cube = 1; cube < 200.f; cube += 1.5f) {
+		root = chem_cbrt(cube);
+/*		printf("%f is the cube root of %f\n", root, cube);*/
+		DOUBLES_EQUAL(cube, root*root*root, EPS);
+	}
 }
