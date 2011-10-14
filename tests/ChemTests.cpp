@@ -33,3 +33,9 @@ TEST(CHEM, CubeRootOfSeveralNumbers) {
 		DOUBLES_EQUAL(cube, root*root*root, EPS);
 	}
 }
+
+TEST(CHEM, SignOfNumber) {
+	CHECK_EQUAL(1, chem_sgn(23.f));
+	CHECK_EQUAL(-1, chem_sgn(-.0000001f));
+	CHECK_EQUAL(0, chem_sgn(0));
+}

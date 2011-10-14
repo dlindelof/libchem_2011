@@ -47,3 +47,11 @@ static float cbrt_iter(float x, float guess) {
 float chem_cbrt(float x) {
   return cbrt_iter(x, 1.0);
 }
+
+/*******************************/
+
+int chem_sgn(float x) {
+	if (x<0) return -1;
+	if (x>0) return 1;
+	return 0;
+}
