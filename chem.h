@@ -1,3 +1,7 @@
+/*
+ * SERIE 3
+ */
+
 /**
  * Compute the square root of the (positive) argument.
  */
@@ -8,7 +12,17 @@ float chem_sqrt(float);
  */
 float chem_cbrt(float);
 
+/*
+ * SERIE 4
+ */
+
 /**
  * Tell sign of argument. +1 if x>0, -1 if x<0, 0 otherwise.
  */
 int chem_sgn(float);
+
+/**
+ * Return the smallest real root, or the real part of the roots of
+ * the a * x^2 + b * x + c polynomial.
+ */
+float chem_smallest_root(float a, float b, float c);

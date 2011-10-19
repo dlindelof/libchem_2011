@@ -39,3 +39,19 @@ TEST(CHEM, SignOfNumber) {
 	CHECK_EQUAL(-1, chem_sgn(-.0000001f));
 	CHECK_EQUAL(0, chem_sgn(0));
 }
+
+TEST(CHEM, SmallestRoots) {
+	float a, b, c;
+	float x1, x2;
+
+	for (a=1;a<10;a++)
+		for (b=0;b<10;b++)
+			for (c=0;c<10;c++) {
+				if (b*b - 4*a*c < 0) continue;
+				x1 = chem_smallest_root(a,b,c);
+				x2 = -b/a - x1;
+				DOUBLES_EQUAL(0, a*x1*x1 + b*x1 + c, EPS);
+				DOUBLES_EQUAL(0, a*x2*x2 + b*x2 + c, EPS);
+				CHECK(x1<x2);
+			}
+}
