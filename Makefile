@@ -5,7 +5,8 @@ TEST_SRC_DIRS = tests
 INCLUDE_DIRS = \
 	. \
 	$(CPPUTEST_HOME)/include	
-CPPUTEST_CFLAGS = -g -ansi -pedantic -Wall
+CPPUTEST_CFLAGS = -ansi
+CPPUTEST_WARNINGFLAGS = -Wall -Wextra -pedantic-errors
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
