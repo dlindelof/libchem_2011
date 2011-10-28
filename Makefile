@@ -17,3 +17,5 @@ mrproper: clean
 	$(MAKE) -C $(CPPUTEST_HOME) clean
 	rm -rf *~
 	rm -rf lib
+
+calc: getop.o stack.o getch.o

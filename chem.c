@@ -58,15 +58,18 @@ int chem_sgn(float x) {
 
 /*******************************/
 float chem_smallest_root(float a, float b, float c) {
-	float x1, x2, delta;
+	float delta;
 
 	delta = b*b - 4*a*c;
 	if (delta >= 0) {
-		x1 = (-b + chem_sqrt(delta))/(2*a);
-		x2 = (-b - chem_sqrt(delta))/(2*a);
-		return x1 < x2 ? x1 : x2;
+		return (-b - chem_sqrt(delta))/(2*a);
 	} else {
-		x1 = -b/(2*a);
-		return x1;
+		return -b/(2*a);
 	}
+}
+
+/*******************************/
+float chem_fmod(float x, float y) {
+	while (x>=y) x -= y;
+	return x;
 }

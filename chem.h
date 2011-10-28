@@ -26,3 +26,8 @@ int chem_sgn(float);
  * the a * x^2 + b * x + c polynomial.
  */
 float chem_smallest_root(float a, float b, float c);
+
+/**
+ * Return the floating-point remainder of dividing x by y.
+ */
+float chem_fmod(float x, float y);

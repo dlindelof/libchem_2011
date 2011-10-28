@@ -12,6 +12,9 @@ TEST_GROUP(CHEM) {
 	void teardown() {}
 };
 
+/*******************************/
+/********* SERIE 3 *************/
+/*******************************/
 TEST(CHEM, SquareRootOfSeveralNumbers) {
 	float square;
 	float root;
@@ -34,6 +37,9 @@ TEST(CHEM, CubeRootOfSeveralNumbers) {
 	}
 }
 
+/*******************************/
+/********* SERIE 4 *************/
+/*******************************/
 TEST(CHEM, SignOfNumber) {
 	CHECK_EQUAL(1, chem_sgn(23.f));
 	CHECK_EQUAL(-1, chem_sgn(-.0000001f));
@@ -54,4 +60,19 @@ TEST(CHEM, SmallestRoots) {
 				DOUBLES_EQUAL(0, a*x2*x2 + b*x2 + c, EPS);
 				CHECK(x1<x2);
 			}
+}
+
+/*******************************/
+/********* SERIE 5 *************/
+/*******************************/
+TEST(CHEM, Modulus) {
+	float x, y;
+	int div;
+
+	for (x = 1; x < 200.f; x += 1.5f) {
+		for (y = 1; y < x; y += 1.5f) {
+			div = x/y;
+			DOUBLES_EQUAL(x, y*div + chem_fmod(x,y), EPS);
+		}
+	}
 }
