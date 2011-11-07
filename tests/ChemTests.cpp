@@ -6,6 +6,7 @@ extern "C" {
 }
 
 #define EPS 0.0001
+#define PI 3.1415926535
 
 TEST_GROUP(CHEM) {
 	void setup() {}
@@ -75,4 +76,30 @@ TEST(CHEM, Modulus) {
 			DOUBLES_EQUAL(x, y*div + chem_fmod(x,y), EPS);
 		}
 	}
+}
+
+/*******************************/
+/********* SERIE 6 *************/
+/*******************************/
+TEST(CHEM, GCD) {
+	int a, b;
+	int gcd;
+	for (a = 1; a < 100; a++) {
+		for (b = 1; b < a; b++) {
+			gcd = chem_gcd(a,b);
+			// Check that gcd divides a and b
+			CHECK(a % gcd == 0);
+			CHECK(b % gcd == 0);
+			// Check that it was the greatest divisor
+			while (++gcd < b) {
+				CHECK(b % gcd != 0 || a % gcd != 0);
+			}
+		}
+	}
+}
+
+TEST(CHEM, Sine) {
+	DOUBLES_EQUAL(1, chem_sin(PI/2), EPS);
+	DOUBLES_EQUAL(0, chem_sin(PI), EPS);
+	DOUBLES_EQUAL(chem_sqrt(2)/2, chem_sin(PI/4), EPS);
 }

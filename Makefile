@@ -18,4 +18,4 @@ mrproper: clean
 	rm -rf *~
 	rm -rf lib
 
-calc: getop.o stack.o getch.o
+calc: getop.o stack.o getch.o lib/libchem.a

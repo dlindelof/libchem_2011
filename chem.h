@@ -27,7 +27,26 @@ int chem_sgn(float);
  */
 float chem_smallest_root(float a, float b, float c);
 
+/*
+ * SERIE 5
+ */
+
 /**
  * Return the floating-point remainder of dividing x by y.
  */
 float chem_fmod(float x, float y);
+
+/*
+ * SERIE 6
+ */
+
+/**
+ * Return the GCD of two positive integers
+ */
+int chem_gcd(int a, int b);
+
+/**
+ * Return the sine of x in radians
+ */
+float chem_sin(float x);
+

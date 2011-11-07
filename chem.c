@@ -73,3 +73,19 @@ float chem_fmod(float x, float y) {
 	while (x>=y) x -= y;
 	return x;
 }
+
+/*******************************/
+int chem_gcd(int a, int b) {
+	if (b == 0) return a;
+	else return chem_gcd(b, a % b);
+}
+
+float chem_sin(float x) {
+	float term;
+	if (fabsf(x) < 0.01) return x;
+	else {
+		term = chem_sin(x/3);
+		return 3*term - 4*term*term*term;
+	}
+}
+
