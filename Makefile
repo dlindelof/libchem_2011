@@ -13,9 +13,10 @@ include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 $(CPPUTEST_LIB):
 	$(MAKE) -C $(CPPUTEST_HOME)
 
-mrproper: clean
+mrproper: realclean
 	$(MAKE) -C $(CPPUTEST_HOME) clean
 	rm -rf *~
 	rm -rf lib
+	rm -rf calc
 
 calc: getop.o stack.o getch.o lib/libchem.a
