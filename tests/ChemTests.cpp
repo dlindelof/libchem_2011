@@ -20,10 +20,11 @@ TEST(CHEM, SquareRootOfSeveralNumbers) {
 	float square;
 	float root;
 
-	for (square = 1; square < 200.f; square += 1.5f) {
+	for (square = 0; square < 2000.f; square += 1.5f) {
 		root = chem_sqrt(square);
 /*		printf("%f is the root of %f\n", root, square);*/
-		DOUBLES_EQUAL(square, root*root, EPS);
+		if (square<0.01) DOUBLES_EQUAL(square, root*root, EPS)
+		else DOUBLES_EQUAL(1.f, (root*root)/square, EPS)
 	}
 }
 
@@ -34,7 +35,8 @@ TEST(CHEM, CubeRootOfSeveralNumbers) {
 	for (cube = 1; cube < 200.f; cube += 1.5f) {
 		root = chem_cbrt(cube);
 /*		printf("%f is the cube root of %f\n", root, cube);*/
-		DOUBLES_EQUAL(cube, root*root*root, EPS);
+		if (cube<0.01) DOUBLES_EQUAL(cube, root*root*root, EPS)
+		else DOUBLES_EQUAL(1.f, (root*root*root)/cube, EPS)
 	}
 }
 
@@ -51,15 +53,16 @@ TEST(CHEM, SmallestRoots) {
 	float a, b, c;
 	float x1, x2;
 
-	for (a=1;a<10;a++)
-		for (b=0;b<10;b++)
-			for (c=0;c<10;c++) {
+	for (a=1;a<30;a++)
+		for (b=0;b<30;b++)
+			for (c=0;c<40;c++) {
 				if (b*b - 4*a*c < 0) continue;
+				//printf("a=%f, b=%f, c=%f\n", a,b,c);
 				x1 = chem_smallest_root(a,b,c);
 				x2 = -b/a - x1;
 				DOUBLES_EQUAL(0, a*x1*x1 + b*x1 + c, EPS);
 				DOUBLES_EQUAL(0, a*x2*x2 + b*x2 + c, EPS);
-				CHECK(x1<x2);
+				CHECK(x1<x2+EPS);
 			}
 }
 

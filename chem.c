@@ -1,6 +1,6 @@
 #include "chem.h"
 
-#define EPS 0.0001
+#define EPS 0.000001
 
 static float fabsf(float x) {
   return x < 0 ? -x : x;
@@ -9,7 +9,8 @@ static float fabsf(float x) {
 /*******************************/
 
 static int sqrt_good_enough(float x, float guess) {
-  return (fabsf(guess*guess - x) < EPS);
+  if (x < 0.1) return fabsf(guess*guess - x) < EPS;
+  else return fabsf(guess*guess - x)/x < EPS;
 }
 
 static float sqrt_improve(float guess, float x) {
@@ -30,7 +31,8 @@ float chem_sqrt(float x) {
 /*******************************/
 
 static float cbrt_good_enough(float x, float guess) {
-  return (fabsf(guess*guess*guess - x) < EPS);
+  if (x<0.1) return fabsf(guess*guess*guess) -x < EPS;
+  else return fabsf((guess*guess*guess - x)/x) < EPS;
 }
 
 static float cbrt_improve(float guess, float x) {
