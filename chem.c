@@ -91,3 +91,40 @@ float chem_sin(float x) {
 	}
 }
 
+/*******************************/
+void chem_matrix_multiply(float** A, float**B, int m, int n, int o, float**C) {
+  int i,j,k;
+  float sum;
+  for (i=0;i<m;i++)
+    for (j=0;j<o;j++) {
+      sum = 0.;
+      for (k=0;k<n;k++)
+        sum+=A[i][k]*B[k][j];
+      C[i][j] = sum;
+    }
+}
+
+float chem_mean(float* v, int n) {
+  float sum = 0;
+  int i;
+  for (i=0;i<n;i++)
+    sum+=v[i];
+  return sum/n;
+}
+
+float chem_var(float* v, int n) {
+  float mean, sum=0;
+  int i;
+  mean = chem_mean(v,n);
+  for (i=0;i<n;i++)
+    sum+=(v[i]-mean)*(v[i]-mean);
+  return sum/(n-1);
+}
+
+float chem_trace(float** M, int n) {
+  float sum=0;
+  int i;
+  for (i=0;i<n;i++)
+    sum+=M[i][i];
+  return sum;
+}

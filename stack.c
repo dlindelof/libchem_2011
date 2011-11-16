@@ -22,3 +22,12 @@ float pop(void) {
 		return 0.0;
 	}
 }
+
+float peek(void) {
+  if (sp > 0)
+    return val[sp-1];
+  else {
+    printf("error: stack empty\n");
+    return 0.;
+  }
+}

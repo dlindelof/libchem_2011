@@ -7,7 +7,7 @@
 
 int main() {
   int type;
-  float op2;
+  float op2, op1;
   char s[MAXOP];
 
   while ((type = getop(s)) != EOF) {
@@ -35,6 +35,15 @@ int main() {
     case '%':
       op2 = pop();
       push(chem_fmod(pop(), op2));
+      break;
+    case '?':
+      printf("\t%.8g\n", peek());
+      break;
+    case 'w':
+      op2 = pop();
+      op1 = pop();
+      push(op2);
+      push(op1);
       break;
     case '\n':
       printf("\t%.8g\n", pop());

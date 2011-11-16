@@ -50,3 +50,36 @@ int chem_gcd(int a, int b);
  */
 float chem_sin(float x);
 
+/*
+ * SERIE 7
+ */
+
+/**
+ * Allocate an m-row, n-column matrix
+ */
+float** chem_matrix_new(int m, int n);
+
+/**
+ * Free a previously allocated matrix
+ */
+void chem_matrix_free(float**);
+
+/**
+ * Calculate the mean of a vector of floats
+ */
+float chem_mean(float* v, int n);
+
+/**
+ * Calculate the sample variance of a vector of floats
+ */
+float chem_var(float* v, int n);
+
+/**
+ * Calculate the trace of a (square) matrix of floats
+ */
+float chem_trace(float** M, int n);
+
+/**
+ * Multiply a matrix A(mxn) by a matric B(nxo), save result in C(mxo)
+ */
+void chem_matrix_multiply(float** A, float** B, int m, int n, int o, float** C);
