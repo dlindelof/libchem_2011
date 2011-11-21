@@ -36,6 +36,9 @@ int main() {
       op2 = pop();
       push(chem_fmod(pop(), op2));
       break;
+    case SQRT:
+      push(chem_sqrt(pop()));
+      break;
     case '?':
       printf("\t%.8g\n", peek());
       break;

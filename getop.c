@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "getop.h"
 #include "getch.h"
@@ -11,8 +12,19 @@ int getop(char s[]) {
 		;
 	s[1] = '\0';
 	i=0;
-	if (!isdigit(c) && c != '.' && c != '-')
+	if (!isalpha(c) && !isdigit(c) && c != '.' && c != '-')
 		return c;
+        if (isalpha(c)) {
+          while(isalpha(s[++i] = c = getch()))
+            ;
+          s[i] = '\0';
+          if (c != EOF)
+            ungetch(c);
+          if (!strcmp(s, "sqrt"))
+            return SQRT;
+          else
+            return ERROR;
+        }
 	if (c=='-' && !isdigit(s[++i]=c=getch())) {
 	  ungetch(c);
 	  return '-';

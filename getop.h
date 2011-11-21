@@ -2,7 +2,8 @@
 #define GETOP_H_
 
 #define MAXOP 100
-#define NUMBER '0'
+
+enum { NUMBER, SQRT, CBRT, SINE, GCD, ERROR };
 
 int getop(char []);
 
