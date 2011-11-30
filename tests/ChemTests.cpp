@@ -1,6 +1,7 @@
 #include "CppUTest/TestHarness.h"
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 extern "C" {
 #include "chem.h"
@@ -198,4 +199,82 @@ TEST(CHEM, MatrixTrace) {
   DOUBLES_EQUAL(412, chem_trace(M_A, M), EPS);
 
   chem_matrix_free(M_A);
+}
+
+/*******************************/
+/********* SERIE 8 *************/
+/*******************************/
+
+
+TEST(CHEM, IntegrateSineFromZeroToTwoPi) {
+  float result = chem_integrate(sinf, 0, 2*PI, 1000);
+
+  DOUBLES_EQUAL(0, result, EPS);
+}
+
+TEST(CHEM, IntegrateSineFromZeroToPi) {
+  float result = chem_integrate(sinf, 0, PI, 1000);
+
+  DOUBLES_EQUAL(2, result, EPS);
+}
+
+TEST(CHEM, RootFindsZeroOfSin) {
+  float result = chem_root(sinf, cosf, 2);
+
+  DOUBLES_EQUAL(PI, result, EPS);
+}
+
+TEST(CHEM, FindsFixedPointOfCos) {
+  float result = chem_fixed_point(cosf, 1);
+
+  DOUBLES_EQUAL(0.739, result, EPS);
+}
+
+TEST(CHEM, Transpose) {
+  float** M_A = chem_matrix_new(M,N);
+  float** M_B = chem_matrix_new(N,M);
+  int i,j;
+
+  /* copy A to M_A */
+  memcpy(M_A[0], A[0], M*N*sizeof(float));
+
+  chem_transpose(M_A, M_B, M, N);
+
+  for(i=0;i<N;i++)
+    for(j=0;j<M;j++)
+      DOUBLES_EQUAL(M_A[j][i], M_B[i][j], EPS);
+
+  chem_matrix_free(M_A);
+  chem_matrix_free(M_B);
+}
+
+
+TEST(CHEM, DotProduct) {
+  float v[] = {0.7943, 0.3112, 0.5285, 0.1656, 0.6020, 0.2630, 0.6541, 0.6892, 0.7482, 0.4505};
+  float result = chem_dot_product(v, v, 10);
+
+  DOUBLES_EQUAL(3.1317, result, EPS);
+}
+
+float D[5][10] = {{0.171946, 0.554345, 0.751048, 0.173334, 0.418687, 0.960050, 0.508382, 0.014056, 0.280216, 0.138072},
+                   {0.131187, 0.199326, 0.500767, 0.757852, 0.342699, 0.745347, 0.445451, 0.623754, 0.443094, 0.097774},
+                   {0.054106, 0.521988, 0.799229, 0.287897, 0.578384, 0.198533, 0.246216, 0.069602, 0.609864, 0.540952},
+                   {0.421508, 0.523226, 0.905645, 0.615777, 0.458281, 0.705363, 0.366085, 0.886581, 0.454470, 0.370105},
+                   {0.830624, 0.284863, 0.684162, 0.637152, 0.791745, 0.041580, 0.472750, 0.144468, 0.533211, 0.911033}};
+
+TEST(CHEM, MatrixTimesVector) {
+  float** M_D = chem_matrix_new(5,10);
+  float V[] = {0.7943, 0.3112, 0.5285, 0.1656, 0.6020, 0.2630, 0.6541, 0.6892, 0.7482, 0.4505};
+  float U[5];
+  float U_expect[] = { 1.8533, 2.0555, 1.9849, 2.8969, 2.9212};
+  int i;
+
+  memcpy(M_D[0], D[0], 50*sizeof(float));
+
+  chem_matrix_times_vector(M_D, V, U, 5, 10);
+
+  for (i=0;i<5;i++)
+    DOUBLES_EQUAL(U_expect[i], U[i], EPS);
+
+  chem_matrix_free(M_D);
 }

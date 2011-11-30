@@ -83,3 +83,37 @@ float chem_trace(float** M, int n);
  * Multiply a matrix A(mxn) by a matric B(nxo), save result in C(mxo)
  */
 void chem_matrix_multiply(float** A, float** B, int m, int n, int o, float** C);
+
+/*
+ * SERIE 8
+ */
+
+/**
+ * Integrate a function between a and b with n intervals
+ */
+float chem_integrate(float (*f)(float x), float a, float b, int n);
+
+/**
+ * Find a root of a function with the Newton method
+ */
+float chem_root(float (*f)(float x), float (*fp)(float x), float x);
+
+/**
+ * Find the fixed point of a function close to x
+ */
+float chem_fixed_point(float (*f)(float x), float x);
+
+/**
+ * Transpose a matrix A into B
+ */
+void chem_transpose(float** A, float** B, int n, int m);
+
+/**
+ * Compute dot product between two vectors
+ */
+float chem_dot_product(float* V, float* U, int n);
+
+/**
+ * Multiply a n-vector by a m-by-n matrix, put result in m-vector U
+ */
+void chem_matrix_times_vector(float** M, float* V, float* U, int m, int n);

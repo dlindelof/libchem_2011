@@ -61,3 +61,13 @@ TEST(CALC, getopReadsSqrt) {
 
   CHECK_EQUAL(SQRT, op);
 }
+
+TEST(CALC, getopReadsSingleLetterOperators) {
+  getchar_expect("5 p");
+
+  getop(s);
+  op = getop(s);
+
+  CHECK_EQUAL('p', op);
+}
+

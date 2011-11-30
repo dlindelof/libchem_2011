@@ -128,3 +128,61 @@ float chem_trace(float** M, int n) {
     sum+=M[i][i];
   return sum;
 }
+
+/*******************************/
+float chem_integrate(float (*f)(float), float a, float b, int n) {
+  float x = a;
+  float result = f(x)/2;
+  float h = (b-a)/n;
+  int i;
+
+  for (i=1; i<n; i++) {
+    x += h;
+    result += f(x);
+  }
+  result += f(b)/2;
+  result *= h;
+  return result;
+}
+
+float chem_root(float (*f)(float), float (*fp)(float), float x) {
+  while (fabsf(f(x))>EPS)
+    x -= f(x)/fp(x);
+  return x;
+}
+
+float chem_fixed_point(float (*f)(float), float x) {
+  float fx = f(x);
+  while (fabsf(fx-x)>EPS) {
+    x = fx;
+    fx = f(fx);
+  }
+  return fx;
+}
+
+void chem_transpose(float** A, float** B, int n, int m) {
+  int i,j;
+  for (i=0;i<n;i++)
+    for (j=0;j<m;j++)
+      B[j][i] = A[i][j];
+}
+
+float chem_dot_product(float* V, float* U, int n) {
+  float result = 0;
+  int i;
+
+  for (i=0;i<n;i++)
+    result += V[i]*U[i];
+
+  return result;
+}
+
+void chem_matrix_times_vector(float** M, float* V, float* U, int m, int n) {
+  int i,j;
+
+  for (i=0;i<m;i++) {
+    U[i] = 0;
+    for (j=0;j<n;j++)
+      U[i] += M[i][j]*V[j];
+  }
+}

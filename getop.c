@@ -20,6 +20,7 @@ int getop(char s[]) {
           s[i] = '\0';
           if (c != EOF)
             ungetch(c);
+          if (i == 1) return s[0];
           if (!strcmp(s, "sqrt"))
             return SQRT;
           else
