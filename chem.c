@@ -1,5 +1,7 @@
 #include "chem.h"
 
+#include <stdlib.h>
+
 #define EPS 0.000001
 
 static float fabsf(float x) {
@@ -185,4 +187,36 @@ void chem_matrix_times_vector(float** M, float* V, float* U, int m, int n) {
     for (j=0;j<n;j++)
       U[i] += M[i][j]*V[j];
   }
+}
+
+/*******************************/
+static long fib_cache[10000] = {0};
+
+long chem_fibonacci(int n) {
+  if (n==0) return 0;
+  if (n==1) return 1;
+  if (fib_cache[n]!=0) return fib_cache[n];
+  fib_cache[n] = chem_fibonacci(n-1)+chem_fibonacci(n-2);
+  return fib_cache[n];
+}
+
+static long chem_fact_iter(int n, long acc) {
+  if (n==1) return acc;
+  else return chem_fact_iter(n-1, acc*n);
+}
+
+long chem_fact(int n) {
+  return chem_fact_iter(n, 1);
+}
+
+int chem_rand_int(int n) {
+  int scale = RAND_MAX/n;
+  int scaled_max = n*scale;
+  int result;
+  while ((result = rand()) >= scaled_max);
+  return result % n;
+}
+
+float chem_rand_float(float x) {
+  return rand() * x / RAND_MAX;
 }

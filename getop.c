@@ -23,6 +23,14 @@ int getop(char s[]) {
           if (i == 1) return s[0];
           if (!strcmp(s, "sqrt"))
             return SQRT;
+          else if (!strcmp(s, "cbrt"))
+            return CBRT;
+          else if (!strcmp(s, "sin"))
+            return SINE;
+          else if (!strcmp(s, "gcd"))
+            return GCD;
+          else if (!strcmp(s, "smallrt"))
+            return SMALL_ROOT;
           else
             return ERROR;
         }

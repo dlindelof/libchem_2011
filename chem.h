@@ -117,3 +117,27 @@ float chem_dot_product(float* V, float* U, int n);
  * Multiply a n-vector by a m-by-n matrix, put result in m-vector U
  */
 void chem_matrix_times_vector(float** M, float* V, float* U, int m, int n);
+
+/*
+ * SERIE 9
+ */
+
+/**
+ * Calculate nth Fibonacci number, i.e. fib(1) = 1, fib(2) = 1, etc
+ */
+long chem_fibonacci(int n);
+
+/**
+ * Calculate factorial of n
+ */
+long chem_fact(int n);
+
+/**
+ * Return a random integer between 0 and n (exclusive)
+ */
+int chem_rand_int(int n);
+
+/**
+ * Return a random float between 0 and x (inclusive)
+ */
+float chem_rand_float(float x);

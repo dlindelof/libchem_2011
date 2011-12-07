@@ -39,6 +39,21 @@ int main() {
     case SQRT:
       push(chem_sqrt(pop()));
       break;
+    case CBRT:
+      push(chem_cbrt(pop()));
+      break;
+    case SMALL_ROOT:
+      op1 = pop();
+      op2 = pop();
+      push(chem_smallest_root(pop(), op2, op1));
+      break;
+    case GCD:
+      op1 = pop();
+      push(chem_gcd(pop(), op1));
+      break;
+    case SINE:
+      push(chem_sin(pop()));
+      break;
     case '?':
       printf("\t%.8g\n", peek());
       break;

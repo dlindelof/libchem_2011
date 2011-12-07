@@ -3,7 +3,7 @@
 
 #define MAXOP 100
 
-enum { NUMBER, SQRT, CBRT, SINE, GCD, ERROR };
+enum { NUMBER, SQRT, CBRT, SINE, GCD, SMALL_ROOT, ERROR };
 
 int getop(char []);
 
