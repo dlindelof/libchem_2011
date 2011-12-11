@@ -220,3 +220,34 @@ int chem_rand_int(int n) {
 float chem_rand_float(float x) {
   return rand() * x / RAND_MAX;
 }
+
+/*******************************/
+static float chem_function_max_iter(float (*f)(float), float a, float b, float x, float fx, float y, float fy) {
+  const float q = 0.618034;
+  const float p = 0.381966;
+  if (fabsf(fx-fy) < EPS) return (x+y)/2;
+  if (fx>fy) return chem_function_max_iter(f, a, y, p*(y-a)+a, f(p*(y-a)+a), x, fx);
+  else return chem_function_max_iter(f, x, b, y, fy, q*(b-x)+x, f(q*(b-x)+x));
+}
+
+float chem_function_max(float (*f)(float x), float a, float b) {
+  const float q = 0.618034;
+  const float p = 0.381966;
+  float x, y;
+  float fx, fy;
+  x = (b-a)*p + a;
+  y = (b-a)*q + a;
+  fx = f(x);
+  fy = f(y);
+  return chem_function_max_iter(f, a, b, x, fx, y, fy);
+}
+
+float chem_monte_carlo(int (*f)(float, float), float x_min, float y_min, float x_max, float y_max, int n) {
+  int hits, misses, i;
+  for (hits=misses=i=0; i<n; i++)
+    if (f(chem_rand_float(x_max-x_min)+x_min, chem_rand_float(y_max-y_min)+y_min))
+      hits++;
+    else
+      misses++;
+  return hits * (x_max-x_min) * (y_max - y_min) / (hits+misses);
+}

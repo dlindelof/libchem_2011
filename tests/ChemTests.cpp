@@ -360,3 +360,29 @@ TEST(CHEM, RandomFloat) {
   CHECK(chi_square <= 1040);
   CHECK(chi_square >= 895);
 }
+
+/*******************************/
+/********* SERIE 9 *************/
+/*******************************/
+TEST(CHEM, FindsMaxOfSine) {
+  DOUBLES_EQUAL(PI/2, chem_function_max(sinf, 0, PI), EPS);
+}
+
+static float function_max_test_function(float x) {
+  return 1-(x-5)*(x-5);
+}
+
+TEST(CHEM, FindsMaxOfFunnyFunction) {
+  float result = chem_function_max(function_max_test_function, 0, 10);
+  DOUBLES_EQUAL(5, result, EPS);
+}
+
+#define RADIUS 5
+static int circle_function(float x, float y) {
+  return (x*x + y*y) <= RADIUS*RADIUS;
+}
+
+TEST(CHEM, AreaOfCircle) {
+  float area = chem_monte_carlo(circle_function, -6, -6, 6, 6, 1e7);
+  DOUBLES_EQUAL(PI*RADIUS*RADIUS, area, 0.01);
+}

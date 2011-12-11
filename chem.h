@@ -141,3 +141,17 @@ int chem_rand_int(int n);
  * Return a random float between 0 and x (inclusive)
  */
 float chem_rand_float(float x);
+
+/*
+ * SERIE 9
+ */
+
+/**
+ * Find maximum of unimodal function
+ */
+float chem_function_max(float (*f)(float x), float a, float b);
+
+/**
+ * Find area of given surface by Monte-Carlo integration
+ */
+float chem_monte_carlo(int (*f)(float x, float y), float x_min, float y_min, float x_max, float y_max, int n);
